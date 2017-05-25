@@ -24,7 +24,7 @@ plt.scatter(x_train[:, 0], x_train[:, 1])
 plt.axis([-3, 3, -3, 3])
 plt.show()
 
-K = 2
+K = 10
 pi = Dirichlet(tf.ones(K))
 mu = Normal(tf.zeros(D), tf.ones(D), sample_shape=K)
 sigmasq = InverseGamma(tf.ones(D), tf.ones(D), sample_shape=K)
@@ -68,6 +68,7 @@ log_liks = tf.reduce_mean(log_liks, 1)
 
 clusters = tf.argmax(log_liks, 1).eval()
 
+print sess.run(qpi.sample(1))
 plt.scatter(x_train[:, 0], x_train[:, 1], c=clusters)
 plt.axis([-3, 3, -3, 3])
 plt.title("Predicted cluster assignments")
