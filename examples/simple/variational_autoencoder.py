@@ -112,4 +112,6 @@ for epoch in range(n_epoch):
   # Visualize hidden representations.
   imgs = hidden_rep.eval()
   for m in range(M):
-    cv2.imwrite(os.path.join(IMG_DIR, '%d.png') % m, imgs[m].reshape(28, 28))
+    img = imgs[m].reshape(28, 28)
+    cv2.normalize(img, img, 0, 255, cv2.NORM_MINMAX)
+    cv2.imwrite(os.path.join(IMG_DIR, '%d.png') % m, img)
